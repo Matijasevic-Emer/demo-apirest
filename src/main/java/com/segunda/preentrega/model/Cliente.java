@@ -1,6 +1,7 @@
 package com.segunda.preentrega.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -11,28 +12,36 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador ID único del Cliente", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private int id;
 
     @Column(name = "NOMBRE")
+    @Schema(description = "Primer y segundo nombre del Cliente", example = "Emerson Gabriel", requiredMode = Schema.RequiredMode.REQUIRED)
     private String nombre;
 
     @Column(name = "APELLIDO")
+    @Schema(description = "Apellidos del Cliente", example = "Matijasevic Sbardella", requiredMode = Schema.RequiredMode.REQUIRED)
     private String apellido;
 
     @Column(name = "DNI")
+    @Schema(description = "DNI del Cliente sin puntos", example = "40586118", requiredMode = Schema.RequiredMode.REQUIRED)
     private long dni;
 
     @Column(name = "ISACTIVO")
+    @Schema(description = "Estado de actividad del Cliente", example = "true", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private Boolean isactivo;
 
     @Column(name = "REPUTACION")
+    @Schema(description = "Reputación del Cliente, en un rango de 0 a 100", example = "85", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private int reputacion;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Schema(description = "NO INCLUIR DOMICILIO - CAMPO EN DESARROLLO", requiredMode = Schema.RequiredMode.NOT_REQUIRED, accessMode = Schema.AccessMode.READ_ONLY)
     private List<Domicilio> domicilio;
 
     @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Schema(description = "Lista de ventas realizadas por el Cliente", requiredMode = Schema.RequiredMode.NOT_REQUIRED, accessMode = Schema.AccessMode.READ_ONLY)
     private List<Venta> venta;
 
     public Cliente() {

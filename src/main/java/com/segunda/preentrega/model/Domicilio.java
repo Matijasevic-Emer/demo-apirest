@@ -1,45 +1,53 @@
 package com.segunda.preentrega.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
-@Table(name="DOMICILIO")
+@Table(name = "DOMICILIO")
 public class Domicilio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador único del domicilio", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private int id;
 
     @Column(name = "CALLE")
+    @Schema(description = "Nombre de la calle del domicilio", example = "Av. Libertador", requiredMode = Schema.RequiredMode.REQUIRED)
     private String calle;
 
     @Column(name = "ALTURA")
+    @Schema(description = "Altura del domicilio", example = "1234", requiredMode = Schema.RequiredMode.REQUIRED)
     private int numero;
 
     @Column(name = "PISO")
+    @Schema(description = "Número de piso del domicilio", example = "5")
     private int piso;
 
     @Column(name = "DEPARTAMENTO")
+    @Schema(description = "Departamento del domicilio", example = "A")
     private String departamento;
 
     @Column(name = "CP")
+    @Schema(description = "Código postal del domicilio", example = "1425", requiredMode = Schema.RequiredMode.REQUIRED)
     private String cp;
 
-    @Column(name="LOCALIDAD")
+    @Column(name = "LOCALIDAD")
+    @Schema(description = "Localidad del domicilio", example = "Buenos Aires", requiredMode = Schema.RequiredMode.REQUIRED)
     private String localidad;
 
     @Column(name = "PROVINCIA")
+    @Schema(description = "Provincia del domicilio", example = "Buenos Aires", requiredMode = Schema.RequiredMode.REQUIRED)
     private String provincia;
- /*
+
     @ManyToOne(fetch = FetchType.LAZY)
-    private Cliente cliente;
-*/
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente") // Especifica el nombre de la columna en la base de datos
+    @JoinColumn(name = "cliente")
+    @Schema(description = "Cliente asociado al domicilio")
     private Cliente cliente;
 
+    // Constructores, getters, setters, equals, hashCode, y toString...
     public Domicilio() {
     }
 
