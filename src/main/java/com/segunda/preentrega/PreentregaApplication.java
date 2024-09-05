@@ -1,5 +1,8 @@
 package com.segunda.preentrega;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -69,6 +72,17 @@ DELETE http://localhost:8080/venta-productos/eliminar/1
 */
 
 @SpringBootApplication
+@OpenAPIDefinition(
+		info = @Info(
+				title = "API REST Example",
+				version = "v1",
+				description = "API para manejar operaciones de clientes"
+		),
+		servers = {
+				@Server(url = "https://demo-apirest-production.up.railway.app", description = "Servidor de Producción"),
+				@Server(url = "http://localhost:8080", description = "Servidor Local")
+		}
+)
 public class PreentregaApplication {
 
 	public static void main(String[] args) {
